@@ -44,13 +44,7 @@ const App: React.FC = () => {
       return; 
     }
 
-    // 1. Before Unload
-    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      e.preventDefault();
-      e.returnValue = ''; 
-    };
-
-    // 2. Bloqueio de Inspeção
+    // 1. Bloqueio de Inspeção (Mantido)
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault();
     };
@@ -61,12 +55,10 @@ const App: React.FC = () => {
       if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) e.preventDefault();
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
     document.addEventListener('contextmenu', handleContextMenu);
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
       document.removeEventListener('contextmenu', handleContextMenu);
       document.removeEventListener('keydown', handleKeyDown);
     };

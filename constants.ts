@@ -1,3 +1,4 @@
+
 // CONFIGURAÇÃO PRINCIPAL
 export const TELEGRAM_LINK = 'https://t.me/+ZWJgZ0ojKgwwN2U5'; // Link atualizado
 
@@ -15,12 +16,26 @@ export const handleGlobalRedirect = () => {
     finalLink = `${finalLink}${separator}ref=${slug}`;
   }
 
+  // TRACKING CLICK SIMULATION
+  // Em vez de window.open (que rastreadores ignoram), criamos um link real invisível.
+  const link = document.createElement('a');
+  link.href = finalLink;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.style.display = 'none'; // Invisível
+
+  // Adiciona ao corpo do documento
+  document.body.appendChild(link);
+
   // TRACKING DELAY
-  // Adiciona um pequeno atraso de 300ms antes de abrir o link.
-  // Isso dá tempo para o script do Track4You disparar o evento de clique 
-  // antes do navegador mudar o foco para a nova aba/janela.
+  // Pequeno delay para garantir que os scripts de tracking registrem a intenção antes da troca de aba
   setTimeout(() => {
-    window.open(finalLink, '_blank');
+    link.click(); // Dispara o evento de clique "nativo"
+    
+    // Limpeza
+    setTimeout(() => {
+      document.body.removeChild(link);
+    }, 100);
   }, 300);
 };
 

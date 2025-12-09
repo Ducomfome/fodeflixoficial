@@ -3,6 +3,25 @@
 // CONFIGURAÇÃO PRINCIPAL
 export const TELEGRAM_LINK = 'https://t.me/+iQFl88bD8mE4MTA5'; // Link atualizado
 
+// FUNÇÃO DE REDIRECIONAMENTO INTELIGENTE (TRACKING)
+export const handleGlobalRedirect = () => {
+  // Pega o caminho da URL (ex: /brasil ou /anuncio-01)
+  const slug = window.location.pathname.replace(/^\/|\/$/g, '');
+  
+  // Se existir um slug e não for a home, adiciona como parâmetro de referência
+  let finalLink = TELEGRAM_LINK;
+  
+  if (slug) {
+    // Adiciona ?start=slug ou ?ref=slug dependendo de como você quer rastrear
+    // Nota: Links de convite do Telegram (+hash) nem sempre preservam parâmetros,
+    // mas esta é a implementação padrão para tracking de bridge pages.
+    const separator = finalLink.includes('?') ? '&' : '?';
+    finalLink = `${finalLink}${separator}ref=${slug}`;
+  }
+
+  window.open(finalLink, '_blank');
+};
+
 // IMAGENS
 // NOTA: Imagens atualizadas para links fornecidos (Proporção 16:9)
 

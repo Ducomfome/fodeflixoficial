@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Play, Info } from 'lucide-react';
 import { getDynamicLink, HERO_IMAGE } from '../constants';
@@ -7,14 +6,16 @@ const Hero: React.FC = () => {
   const link = getDynamicLink();
 
   return (
-    <a 
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="relative h-[80vh] w-full block group overflow-hidden z-0 cursor-pointer no-underline"
-    >
-      {/* Background Image */}
-      <div className="absolute inset-0">
+    <div className="relative h-[80vh] w-full block group overflow-hidden z-0">
+      
+      {/* 1. Link para o Fundo (Background Clicável) */}
+      <a 
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute inset-0 w-full h-full cursor-pointer z-0"
+        aria-label="Acessar Canal"
+      >
         <img 
           src={HERO_IMAGE} 
           alt="Hero Background" 
@@ -23,10 +24,10 @@ const Hero: React.FC = () => {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#141414] h-full w-full pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#141414]/80 via-transparent to-transparent h-full w-full pointer-events-none" />
-      </div>
+      </a>
 
       {/* Content */}
-      <div className="absolute bottom-[20%] left-4 md:left-12 max-w-2xl space-y-4 pointer-events-none">
+      <div className="absolute bottom-[20%] left-4 md:left-12 max-w-2xl space-y-4 pointer-events-none z-10">
         <div className="flex items-center gap-2 mb-2">
           <span className="bg-[#E50914] text-white text-[10px] md:text-xs font-bold px-2 py-1 rounded shadow-sm">
             TOP 1 NO BRASIL
@@ -43,24 +44,38 @@ const Hero: React.FC = () => {
           Entre agora no nosso canal privado e tenha acesso imediato.
         </p>
 
-        {/* Real Buttons inside Link for Tracking */}
+        {/* 2. Botões Reais (Links envolvendo Button tags) */}
         <div className="flex items-center gap-3 pt-4 pointer-events-auto">
-          <button 
-            className="bg-white text-black group-hover:bg-white/90 transition flex items-center gap-2 px-6 md:px-8 py-2 md:py-3 rounded font-bold text-sm md:text-lg hover:scale-105 transform duration-200 shadow-lg cursor-pointer border-none"
+          <a 
+            href={link} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="no-underline"
           >
-            <Play className="w-5 h-5 md:w-6 md:h-6 fill-black" />
-            <span>Assistir Agora</span>
-          </button>
+            <button 
+              className="bg-white text-black hover:bg-white/90 transition flex items-center gap-2 px-6 md:px-8 py-2 md:py-3 rounded font-bold text-sm md:text-lg hover:scale-105 transform duration-200 shadow-lg cursor-pointer border-none"
+            >
+              <Play className="w-5 h-5 md:w-6 md:h-6 fill-black" />
+              <span>Assistir Agora</span>
+            </button>
+          </a>
           
-          <button 
-            className="bg-gray-500/70 text-white group-hover:bg-gray-500/50 transition flex items-center gap-2 px-6 md:px-8 py-2 md:py-3 rounded font-bold text-sm md:text-lg backdrop-blur-sm hover:scale-105 transform duration-200 cursor-pointer border-none"
+          <a 
+            href={link} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="no-underline"
           >
-            <Info className="w-5 h-5 md:w-6 md:h-6" />
-            <span>Mais Informações</span>
-          </button>
+            <button 
+              className="bg-gray-500/70 text-white hover:bg-gray-500/50 transition flex items-center gap-2 px-6 md:px-8 py-2 md:py-3 rounded font-bold text-sm md:text-lg backdrop-blur-sm hover:scale-105 transform duration-200 cursor-pointer border-none"
+            >
+              <Info className="w-5 h-5 md:w-6 md:h-6" />
+              <span>Mais Informações</span>
+            </button>
+          </a>
         </div>
       </div>
-    </a>
+    </div>
   );
 };
 

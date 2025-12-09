@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Play, Unlock } from 'lucide-react';
 import { getDynamicLink } from '../constants';

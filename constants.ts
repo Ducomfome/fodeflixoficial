@@ -1,7 +1,7 @@
 
 
 // CONFIGURAÇÃO PRINCIPAL
-export const TELEGRAM_LINK = 'https://t.me/+iQFl88bD8mE4MTA5'; // Link atualizado
+export const TELEGRAM_LINK = 'https://t.me/+ZWJgZ0ojKgwwN2U5'; // Link atualizado
 
 // FUNÇÃO DE REDIRECIONAMENTO INTELIGENTE (TRACKING)
 export const handleGlobalRedirect = () => {

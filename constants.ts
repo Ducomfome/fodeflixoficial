@@ -2,41 +2,38 @@
 // CONFIGURAÇÃO PRINCIPAL
 export const TELEGRAM_LINK = 'https://t.me/+ZWJgZ0ojKgwwN2U5'; // Link atualizado
 
-// FUNÇÃO DE REDIRECIONAMENTO INTELIGENTE (TRACKING)
-export const handleGlobalRedirect = () => {
+// GERA O LINK DINÂMICO PARA USO EM TAGS <a> (MELHOR PARA TRACKING)
+export const getDynamicLink = () => {
   // Pega o caminho da URL (ex: /brasil ou /anuncio-01)
   const slug = window.location.pathname.replace(/^\/|\/$/g, '');
   
-  // Se existir um slug e não for a home, adiciona como parâmetro de referência
+  // Se existir um slug, adiciona como parâmetro de referência
   let finalLink = TELEGRAM_LINK;
   
   if (slug) {
-    // Adiciona ?start=slug ou ?ref=slug dependendo de como você quer rastrear
     const separator = finalLink.includes('?') ? '&' : '?';
     finalLink = `${finalLink}${separator}ref=${slug}`;
   }
+  
+  return finalLink;
+};
 
-  // TRACKING CLICK SIMULATION
-  // Em vez de window.open (que rastreadores ignoram), criamos um link real invisível.
-  const link = document.createElement('a');
-  link.href = finalLink;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-  link.style.display = 'none'; // Invisível
-
-  // Adiciona ao corpo do documento
-  document.body.appendChild(link);
-
-  // TRACKING DELAY
-  // Pequeno delay para garantir que os scripts de tracking registrem a intenção antes da troca de aba
+// MANTER A FUNÇÃO ANTIGA PARA COMPATIBILIDADE (SE NECESSÁRIO)
+export const handleGlobalRedirect = () => {
+  const link = getDynamicLink();
+  
+  // Cria link invisível para simular clique (caso seja chamado via JS)
+  const a = document.createElement('a');
+  a.href = link;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  
   setTimeout(() => {
-    link.click(); // Dispara o evento de clique "nativo"
-    
-    // Limpeza
-    setTimeout(() => {
-      document.body.removeChild(link);
-    }, 100);
-  }, 300);
+    a.click();
+    setTimeout(() => document.body.removeChild(a), 100);
+  }, 150);
 };
 
 // IMAGENS

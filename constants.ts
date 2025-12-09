@@ -1,5 +1,3 @@
-
-
 // CONFIGURAÇÃO PRINCIPAL
 export const TELEGRAM_LINK = 'https://t.me/+ZWJgZ0ojKgwwN2U5'; // Link atualizado
 

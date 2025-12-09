@@ -1,7 +1,7 @@
 
 import React, { useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, PlayCircle } from 'lucide-react';
-import { TELEGRAM_LINK } from '../constants';
+import { handleGlobalRedirect } from '../constants';
 
 interface VideoRowProps {
   title: string;
@@ -19,10 +19,6 @@ const VideoRow: React.FC<VideoRowProps> = ({ title, items }) => {
 
   // State apenas para mudar o cursor visualmente
   const [isCursorGrabbing, setIsCursorGrabbing] = useState(false);
-
-  const handleRedirect = () => {
-    window.open(TELEGRAM_LINK, '_blank');
-  };
 
   const scroll = (direction: 'left' | 'right') => {
     if (rowRef.current) {
@@ -85,14 +81,14 @@ const VideoRow: React.FC<VideoRowProps> = ({ title, items }) => {
       return;
     }
     // Se foi um clique limpo, redireciona
-    handleRedirect();
+    handleGlobalRedirect();
   };
 
   return (
     <div className="space-y-2 mb-8 px-4 md:px-12 group relative z-20">
       <h2 
         className="text-white text-lg md:text-2xl font-semibold cursor-pointer hover:text-gray-300 transition w-fit"
-        onClick={handleRedirect}
+        onClick={handleGlobalRedirect}
       >
         {title}
       </h2>

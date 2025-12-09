@@ -1,16 +1,13 @@
 
 import React from 'react';
 import { Play, Info } from 'lucide-react';
-import { TELEGRAM_LINK, HERO_IMAGE } from '../constants';
+import { handleGlobalRedirect, HERO_IMAGE } from '../constants';
 
 const Hero: React.FC = () => {
-  const handleRedirect = () => {
-    window.open(TELEGRAM_LINK, '_blank');
-  };
 
   return (
     <div 
-      onClick={handleRedirect}
+      onClick={handleGlobalRedirect}
       className="relative h-[80vh] w-full cursor-pointer group overflow-hidden z-0"
     >
       {/* Background Image */}
@@ -48,7 +45,7 @@ const Hero: React.FC = () => {
           <button 
             onClick={(e) => {
               e.stopPropagation();
-              handleRedirect();
+              handleGlobalRedirect();
             }}
             className="bg-white text-black hover:bg-white/90 transition flex items-center gap-2 px-6 md:px-8 py-2 md:py-3 rounded font-bold text-sm md:text-lg hover:scale-105 transform duration-200 shadow-lg"
           >
@@ -59,7 +56,7 @@ const Hero: React.FC = () => {
           <button 
             onClick={(e) => {
               e.stopPropagation();
-              handleRedirect();
+              handleGlobalRedirect();
             }}
             className="bg-gray-500/70 text-white hover:bg-gray-500/50 transition flex items-center gap-2 px-6 md:px-8 py-2 md:py-3 rounded font-bold text-sm md:text-lg backdrop-blur-sm hover:scale-105 transform duration-200"
           >

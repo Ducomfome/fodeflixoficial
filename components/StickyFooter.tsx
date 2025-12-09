@@ -8,26 +8,25 @@ const StickyFooter: React.FC = () => {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#141414]/95 backdrop-blur-sm border-t border-gray-800 p-3 md:p-4 shadow-[0_-4px_20px_rgba(0,0,0,0.5)] animate-slide-up">
-      <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
-        
-        {/* Texto de Urgência */}
-        <div className="hidden xs:flex flex-col">
-          <div className="flex items-center gap-2 text-[#46d369] font-bold text-xs md:text-sm">
-            <Unlock className="w-3 h-3 md:w-4 md:h-4" />
-            <span>ACESSO LIBERADO</span>
-          </div>
-          <p className="text-gray-400 text-[10px] md:text-xs">
-            As vagas para o canal VIP encerram em breve.
-          </p>
+      <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
+        <div className="hidden md:flex flex-col">
+          <span className="text-white font-bold text-lg flex items-center gap-2">
+            <Unlock className="w-4 h-4 text-green-500" />
+            Acesso Liberado
+          </span>
+          <span className="text-gray-400 text-xs">Vagas limitadas para hoje</span>
         </div>
 
-        {/* Botão Principal Transformado em Link */}
         <a 
           href={link}
-          className="flex-1 bg-[#E50914] hover:bg-[#b2070f] text-white font-black text-sm md:text-lg uppercase tracking-wide py-3 px-6 rounded shadow-[0_0_15px_rgba(229,9,20,0.5)] flex items-center justify-center gap-2 transition-transform active:scale-95 animate-pulse no-underline"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full md:w-auto"
         >
-          <Play className="w-5 h-5 fill-white" />
-          ENTRAR AGORA
+          <button className="w-full bg-[#E50914] hover:bg-[#b2070f] text-white font-black uppercase py-3 px-8 rounded flex items-center justify-center gap-2 text-sm md:text-base shadow-lg transition-transform active:scale-95 animate-pulse border-none cursor-pointer">
+            <Play className="w-5 h-5 fill-white" />
+            ENTRAR AGORA
+          </button>
         </a>
       </div>
     </div>

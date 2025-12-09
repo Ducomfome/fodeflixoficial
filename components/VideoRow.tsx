@@ -1,4 +1,3 @@
-
 import React, { useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, PlayCircle } from 'lucide-react';
 import { getDynamicLink } from '../constants';
@@ -76,6 +75,8 @@ const VideoRow: React.FC<VideoRowProps> = ({ title, items }) => {
     <div className="space-y-2 mb-8 px-4 md:px-12 group relative z-20">
       <a 
         href={link}
+        target="_blank"
+        rel="noopener noreferrer"
         className="text-white text-lg md:text-2xl font-semibold cursor-pointer hover:text-gray-300 transition w-fit block no-underline"
       >
         {title}
@@ -105,6 +106,8 @@ const VideoRow: React.FC<VideoRowProps> = ({ title, items }) => {
             <a 
               key={index}
               href={link}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={handleLinkClick}
               onDragStart={(e) => e.preventDefault()} 
               className="relative min-w-[240px] md:min-w-[320px] aspect-video rounded overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105 hover:z-50 shadow-lg group/item block"

@@ -1,12 +1,9 @@
 
 import React from 'react';
 import { Play, Unlock } from 'lucide-react';
-import { TELEGRAM_LINK } from '../constants';
+import { handleGlobalRedirect } from '../constants';
 
 const StickyFooter: React.FC = () => {
-  const handleRedirect = () => {
-    window.open(TELEGRAM_LINK, '_blank');
-  };
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#141414]/95 backdrop-blur-sm border-t border-gray-800 p-3 md:p-4 shadow-[0_-4px_20px_rgba(0,0,0,0.5)] animate-slide-up">
@@ -25,7 +22,7 @@ const StickyFooter: React.FC = () => {
 
         {/* Botão Principal */}
         <button 
-          onClick={handleRedirect}
+          onClick={handleGlobalRedirect}
           className="flex-1 bg-[#E50914] hover:bg-[#b2070f] text-white font-black text-sm md:text-lg uppercase tracking-wide py-3 px-6 rounded shadow-[0_0_15px_rgba(229,9,20,0.5)] flex items-center justify-center gap-2 transition-transform active:scale-95 animate-pulse"
         >
           <Play className="w-5 h-5 fill-white" />

@@ -1,7 +1,7 @@
 
 import React, { useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, PlayCircle } from 'lucide-react';
-import { handleGlobalRedirect } from '../constants';
+import { getDynamicLink } from '../constants';
 
 interface VideoRowProps {
   title: string;
@@ -10,9 +10,9 @@ interface VideoRowProps {
 
 const VideoRow: React.FC<VideoRowProps> = ({ title, items }) => {
   const rowRef = useRef<HTMLDivElement>(null);
+  const link = getDynamicLink();
   
   // Usamos refs para rastrear o movimento sem causar re-renderizações desnecessárias
-  // e para garantir que o valor seja síncrono no evento onClick
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
@@ -34,12 +34,9 @@ const VideoRow: React.FC<VideoRowProps> = ({ title, items }) => {
   // Drag Handlers
   const onMouseDown = (e: React.MouseEvent) => {
     if (!rowRef.current) return;
-    
-    // Resetamos a flag de drag. Assumimos que é um clique até que se prove o contrário (movimento)
     isDraggingRef.current = false;
     startXRef.current = e.pageX - rowRef.current.offsetLeft;
     scrollLeftRef.current = rowRef.current.scrollLeft;
-    
     setIsCursorGrabbing(true);
   };
 
@@ -50,48 +47,39 @@ const VideoRow: React.FC<VideoRowProps> = ({ title, items }) => {
 
   const onMouseUp = () => {
     setIsCursorGrabbing(false);
-    // A flag isDraggingRef não é resetada aqui para que o onClick possa lê-la
-    // Ela será resetada no próximo MouseDown
   };
 
   const onMouseMove = (e: React.MouseEvent) => {
     if (!rowRef.current) return;
-    
-    // Se o botão não estiver pressionado, ignora
     if (e.buttons !== 1) return;
 
     e.preventDefault();
     
     const x = e.pageX - rowRef.current.offsetLeft;
-    const walk = (x - startXRef.current); // Distância movida
+    const walk = (x - startXRef.current); 
     
-    // Só considera "arrastar" se moveu mais de 5 pixels
-    // Isso previne que tremidas no mouse bloqueiem o clique
     if (Math.abs(walk) > 5) {
       isDraggingRef.current = true;
       rowRef.current.scrollLeft = scrollLeftRef.current - walk * 2;
     }
   };
 
-  const handleCardClick = (e: React.MouseEvent) => {
-    // Se houve arrasto real, bloqueamos o clique
+  const handleLinkClick = (e: React.MouseEvent) => {
+    // Se houve arrasto real, bloqueamos a navegação do link
     if (isDraggingRef.current) {
       e.preventDefault();
       e.stopPropagation();
-      return;
     }
-    // Se foi um clique limpo, redireciona
-    handleGlobalRedirect();
   };
 
   return (
     <div className="space-y-2 mb-8 px-4 md:px-12 group relative z-20">
-      <h2 
-        className="text-white text-lg md:text-2xl font-semibold cursor-pointer hover:text-gray-300 transition w-fit"
-        onClick={handleGlobalRedirect}
+      <a 
+        href={link}
+        className="text-white text-lg md:text-2xl font-semibold cursor-pointer hover:text-gray-300 transition w-fit block no-underline"
       >
         {title}
-      </h2>
+      </a>
       
       <div className="relative group/row">
         {/* Left Arrow */}
@@ -114,11 +102,12 @@ const VideoRow: React.FC<VideoRowProps> = ({ title, items }) => {
           onMouseMove={onMouseMove}
         >
           {items.map((imgUrl, index) => (
-            <div 
+            <a 
               key={index}
-              onClick={handleCardClick}
-              onDragStart={(e) => e.preventDefault()} // Impede o "ghost image" nativo do browser ao arrastar img
-              className="relative min-w-[240px] md:min-w-[320px] aspect-video rounded overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105 hover:z-50 shadow-lg group/item"
+              href={link}
+              onClick={handleLinkClick}
+              onDragStart={(e) => e.preventDefault()} 
+              className="relative min-w-[240px] md:min-w-[320px] aspect-video rounded overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105 hover:z-50 shadow-lg group/item block"
             >
               <img 
                 src={imgUrl} 
@@ -136,7 +125,7 @@ const VideoRow: React.FC<VideoRowProps> = ({ title, items }) => {
               <div className="absolute top-2 right-2 bg-[#E50914] text-white text-[10px] font-bold px-1.5 py-0.5 rounded opacity-0 group-hover/item:opacity-100 transition duration-300 pointer-events-none">
                 NOVO
               </div>
-            </div>
+            </a>
           ))}
         </div>
 

@@ -13,7 +13,7 @@ const Hero: React.FC = () => {
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className="absolute inset-0 w-full h-full cursor-pointer z-0"
+        className="absolute inset-0 w-full h-full cursor-pointer z-0 block"
         aria-label="Acessar Canal"
       >
         <img 
@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
           Entre agora no nosso canal privado e tenha acesso imediato.
         </p>
 
-        {/* 2. Botões Reais (Links envolvendo Button tags) */}
+        {/* 2. Botões Reais dentro de Links (Estrutura solicitada para Track4You) */}
         <div className="flex items-center gap-3 pt-4 pointer-events-auto">
           <a 
             href={link} 
@@ -52,9 +52,7 @@ const Hero: React.FC = () => {
             rel="noopener noreferrer"
             className="no-underline"
           >
-            <button 
-              className="bg-white text-black hover:bg-white/90 transition flex items-center gap-2 px-6 md:px-8 py-2 md:py-3 rounded font-bold text-sm md:text-lg hover:scale-105 transform duration-200 shadow-lg cursor-pointer border-none"
-            >
+            <button className="bg-white text-black hover:bg-white/90 transition flex items-center gap-2 px-6 md:px-8 py-2 md:py-3 rounded font-bold text-sm md:text-lg hover:scale-105 transform duration-200 shadow-lg cursor-pointer border-none">
               <Play className="w-5 h-5 md:w-6 md:h-6 fill-black" />
               <span>Assistir Agora</span>
             </button>
@@ -66,9 +64,7 @@ const Hero: React.FC = () => {
             rel="noopener noreferrer"
             className="no-underline"
           >
-            <button 
-              className="bg-gray-500/70 text-white hover:bg-gray-500/50 transition flex items-center gap-2 px-6 md:px-8 py-2 md:py-3 rounded font-bold text-sm md:text-lg backdrop-blur-sm hover:scale-105 transform duration-200 cursor-pointer border-none"
-            >
+            <button className="bg-gray-500/70 text-white hover:bg-gray-500/50 transition flex items-center gap-2 px-6 md:px-8 py-2 md:py-3 rounded font-bold text-sm md:text-lg backdrop-blur-sm hover:scale-105 transform duration-200 cursor-pointer border-none">
               <Info className="w-5 h-5 md:w-6 md:h-6" />
               <span>Mais Informações</span>
             </button>

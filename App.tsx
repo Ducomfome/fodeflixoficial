@@ -1,9 +1,10 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import VideoRow from './components/VideoRow';
 import StickyFooter from './components/StickyFooter';
-import { CATEGORIES, handleGlobalRedirect } from './constants';
+import { CATEGORIES, getDynamicLink } from './constants';
 import { ArrowUpRight, AlertCircle, Copy, Check } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -28,14 +29,14 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    // 0. Detectar Navegador do TikTok (Lógica Reforçada)
+    // 0. Detectar Navegador do TikTok
     const ua = navigator.userAgent.toLowerCase();
     const isInApp = [
       'tiktok', 
       'bytedance', 
-      'aweme',      // Nome do pacote interno do TikTok
-      'musical_ly', // Nome antigo
-      'trill'       // Outra variação asiática
+      'aweme',      
+      'musical_ly', 
+      'trill'       
     ].some(keyword => ua.includes(keyword));
 
     if (isInApp) {
@@ -43,7 +44,7 @@ const App: React.FC = () => {
       return; 
     }
 
-    // 1. Before Unload (Confirmação nativa do navegador ao tentar fechar)
+    // 1. Before Unload
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
       e.preventDefault();
       e.returnValue = ''; 
@@ -71,7 +72,7 @@ const App: React.FC = () => {
     };
   }, []);
 
-  // TELA DE TUTORIAL PARA TIKTOK (ATUALIZADA)
+  // TELA DE TUTORIAL PARA TIKTOK
   if (isTikTok) {
     return (
       <div className="min-h-screen bg-[#141414] text-white flex flex-col items-center justify-center p-6 text-center relative overflow-hidden font-sans">
@@ -137,7 +138,7 @@ const App: React.FC = () => {
           </p>
         </div>
         
-        {/* Opção de emergência caso seja falso positivo */}
+        {/* Opção de emergência */}
         <button 
            onClick={() => setIsTikTok(false)}
            className="mt-8 text-xs text-gray-600 underline hover:text-gray-400"
@@ -147,6 +148,8 @@ const App: React.FC = () => {
       </div>
     );
   }
+
+  const link = getDynamicLink();
 
   // APP NORMAL
   return (
@@ -168,13 +171,13 @@ const App: React.FC = () => {
       </main>
 
       <footer className="px-4 md:px-12 py-12 mt-12 text-gray-500 text-sm text-center">
-        <div 
-          onClick={handleGlobalRedirect}
-          className="cursor-pointer hover:underline text-[#E50914] flex items-center justify-center gap-1 mb-8"
+        <a 
+          href={link}
+          className="cursor-pointer hover:underline text-[#E50914] flex items-center justify-center gap-1 mb-8 no-underline"
         >
           <span>Acessar Canal Oficial</span>
           <ArrowUpRight className="w-4 h-4" />
-        </div>
+        </a>
         <p>© 2024 FODE-FLIX. Todos os direitos reservados.</p>
       </footer>
 

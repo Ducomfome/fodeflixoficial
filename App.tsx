@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -165,6 +164,8 @@ const App: React.FC = () => {
       <footer className="px-4 md:px-12 py-12 mt-12 text-gray-500 text-sm text-center">
         <a 
           href={link}
+          target="_blank"
+          rel="noopener noreferrer"
           className="cursor-pointer hover:underline text-[#E50914] flex items-center justify-center gap-1 mb-8 no-underline"
         >
           <span>Acessar Canal Oficial</span>

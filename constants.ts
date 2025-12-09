@@ -11,13 +11,17 @@ export const handleGlobalRedirect = () => {
   
   if (slug) {
     // Adiciona ?start=slug ou ?ref=slug dependendo de como você quer rastrear
-    // Nota: Links de convite do Telegram (+hash) nem sempre preservam parâmetros,
-    // mas esta é a implementação padrão para tracking de bridge pages.
     const separator = finalLink.includes('?') ? '&' : '?';
     finalLink = `${finalLink}${separator}ref=${slug}`;
   }
 
-  window.open(finalLink, '_blank');
+  // TRACKING DELAY
+  // Adiciona um pequeno atraso de 300ms antes de abrir o link.
+  // Isso dá tempo para o script do Track4You disparar o evento de clique 
+  // antes do navegador mudar o foco para a nova aba/janela.
+  setTimeout(() => {
+    window.open(finalLink, '_blank');
+  }, 300);
 };
 
 // IMAGENS

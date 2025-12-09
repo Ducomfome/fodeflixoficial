@@ -36,7 +36,7 @@ export const handleGlobalRedirect = () => {
   }, 150);
 };
 
-// IMAGENS
+// IMAGENSa
 // NOTA: Imagens atualizadas para links fornecidos (Proporção 16:9)
 
 export const HERO_IMAGE = "https://pub-9ad786fb39ec4b43b2905a55edcb38d9.r2.dev/bannerprincipal.jpg"; 
